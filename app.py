@@ -8,7 +8,7 @@ st.markdown("""
     <style>
     /* جعل الخلفية بيضاء تماماً */
     .stApp {
-        background-color: #FFFFFF !important;
+        background-color: #FDF8FB !important;
     }
     
     /* حاوية العرض الهرمي */
@@ -24,7 +24,7 @@ st.markdown("""
     .box-abnormal {
         width: 250px;
         background-color: #C73B8A !important;
-        color: #FFFFFF !important;
+        color: #000000 !important;
         font-size: 20px;
         font-weight: bold;
         text-align: center;
@@ -49,14 +49,14 @@ st.markdown("""
     /* كارت BENIGN (حدود وردية وخلفية بيضاء) */
     .box-benign {
         border: 3.5px solid #C73B8A !important;
-        background-color: #FFFFFF !important;
-        color: #C73B8A !important;
+        background-color: #FDF8FB !important;
+        color: #000000 !important;
     }
     
     /* كارت MALIGNANT (وردي صارخ صلب كامل) */
     .box-malignant {
         background-color: #C73B8A !important;
-        color: #FFFFFF !important;
+        color: #000000 !important;
         border: 3.5px solid #C73B8A !important;
     }
     

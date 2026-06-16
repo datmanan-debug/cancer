@@ -131,3 +131,38 @@ with nav_col3:
     if st.button("Next »"):
         st.write("")  # الأكشن للتالي
     st.markdown('</div>', unsafe_allow_html=True)
+    import streamlit as st
+
+# إعدادات الصفحة الأساسية لتتوسط الشاشة
+st.set_page_config(page_title="Classification", layout="centered")
+
+# الستايل النهائي لضبط السنترة الهندسية المتوازنة تماماً
+st.markdown("""
+    <style>
+    /* جعل الخلفية بيضاء تماماً */
+    .stApp {
+        background-color: #FDF8FB !important;
+    }
+    
+    /* حاوية لتوسط كارت ABNORMAL بالوسط الحقيقي */
+    .top-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+    
+    /* كارت ABNORMAL الرئيسي */
+    .box-abnormal {
+        width: 260px;
+        background-color: #C73B8A !important;
+        color: #000000 !important;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px 0;
+        border-radius: 20px;
+        border: 3.5px solid #C73B8A !important;
+        box-shadow: 0px 4px

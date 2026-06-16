@@ -1,6 +1,6 @@
 import streamlit as st
 
-# إعدادات الصفحة
+# إعداد الصفحة
 st.set_page_config(
     page_title="Classification",
     layout="centered"
@@ -10,58 +10,47 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* الخلفية */
 .stApp {
     background-color: #FDF8FB;
 }
 
-/* الكروت */
 .box-card {
-    width: 280px;
+    width: 250px;
     text-align: center;
-    padding: 16px 0;
+    padding: 18px 0;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+    margin: auto;
 }
 
-/* ABNORMAL */
 .box-abnormal {
     background-color: #C73B8A;
     color: black;
     border: 3px solid #C73B8A;
 }
 
-/* BENIGN */
 .box-benign {
     background-color: white;
     color: black;
     border: 3px solid #C73B8A;
 }
 
-/* MALIGNANT */
 .box-malignant {
     background-color: #C73B8A;
     color: black;
     border: 3px solid #C73B8A;
 }
 
-/* الأزرار */
 div.stButton > button {
     background-color: #E91E8C !important;
     color: white !important;
     border: none !important;
     border-radius: 25px !important;
-    padding: 12px 40px !important;
     width: 140px !important;
+    height: 50px !important;
     font-size: 18px !important;
     font-weight: bold !important;
-}
-
-div.stButton > button:hover {
-    background-color: #A32D6F !important;
-    color: white !important;
 }
 
 </style>
@@ -71,47 +60,40 @@ div.stButton > button:hover {
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-st.markdown("""
-<div style="display:flex; flex-direction:column; align-items:center;">
+# ABNORMAL بالنص
+col1, col2, col3 = st.columns([1,2,1])
 
-    <!-- ABNORMAL بالنص -->
-    <div class="box-card box-abnormal">
-        ABNORMAL
-    </div>
+with col2:
+    st.markdown(
+        '<div class="box-card box-abnormal">ABNORMAL</div>',
+        unsafe_allow_html=True
+    )
 
-    <!-- BENIGN و MALIGNANT -->
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        width:650px;
-        margin-top:40px;
-    ">
+st.markdown("<br><br>", unsafe_allow_html=True)
 
-        <div class="box-card box-benign">
-            BENIGN
-        </div>
+# BENIGN يسار و MALIGNANT يمين
+left, center, right = st.columns([1.5,1,1.5])
 
-        <div class="box-card box-malignant">
-            MALIGNANT
-        </div>
+with left:
+    st.markdown(
+        '<div class="box-card box-benign">BENIGN</div>',
+        unsafe_allow_html=True
+    )
 
-    </div>
+with right:
+    st.markdown(
+        '<div class="box-card box-malignant">MALIGNANT</div>',
+        unsafe_allow_html=True
+    )
 
-</div>
-""", unsafe_allow_html=True)
-
-# ================= مسافة =================
-
-st.markdown("<br><br><br>", unsafe_allow_html=True)
+st.markdown("<br><br><br><br>", unsafe_allow_html=True)
 
 # ================= أزرار التنقل =================
 
-col1, col2, col3, col4 = st.columns([1.3, 1, 1, 1.3])
+c1, c2, c3, c4 = st.columns([1.2,1,1,1.2])
 
-with col2:
-    if st.button("« Back"):
-        pass
+with c2:
+    st.button("« Back")
 
-with col3:
-    if st.button("Next »"):
-        pass
+with c3:
+    st.button("Next »")

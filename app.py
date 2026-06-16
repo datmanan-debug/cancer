@@ -11,16 +11,17 @@ st.markdown("""
         background-color: #FDF8FB !important;
     }
     
-    /* حاوية العرض الهرمي */
+    /* حاوية مخصصة لضمان التوسط الحقيقي والكامل لـ ABNORMAL في السنتر */
     .hierarchy-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100%;
         margin-top: 40px;
     }
     
-    /* الكارت العلوي الرئيسي ABNORMAL */
+    /* الكارت العلوي الرئيسي ABNORMAL بالوسط تماماً */
     .box-abnormal {
         width: 250px;
         background-color: #C73B8A !important;
@@ -32,7 +33,7 @@ st.markdown("""
         border-radius: 20px;
         border: 3.5px solid #C73B8A !important;
         box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-        margin-bottom: 40px;
+        margin: 0 auto 40px auto; /* الحواف التلقائية تضمن السنترة الكاملة */
     }
     
     /* الكروت الفرعية بالأسفل */
@@ -90,22 +91,22 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# --- 1. بناء الهيكل الهرمي المرتب (العنصر الرئيسي فوق) ---
+# --- 1. بناء الهيكل الهرمي المرتب (العنصر الرئيسي بالوسط تماماً) ---
 st.markdown('<div class="hierarchy-container">', unsafe_allow_html=True)
 st.markdown('<div class="box-abnormal">ABNORMAL</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 
-# --- 2. صف العناصر الفرعية (BENIGN و MALIGNANT) مع مسافة واضحة بينهم ---
+# --- 2. صف العناصر الفرعية (BENIGN و MALIGNANT) متباعدين بشكل متناظر حول السنتر ---
 col_left, col_right = st.columns([1, 1])
 
 with col_left:
-    st.markdown('<div style="display: flex; justify-content: flex-end; padding-right: 20px;">', unsafe_allow_html=True)
+    st.markdown('<div style="display: flex; justify-content: flex-end; padding-right: 30px;">', unsafe_allow_html=True)
     st.markdown('<div class="box-sub box-benign">BENIGN</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col_right:
-    st.markdown('<div style="display: flex; justify-content: flex-start; padding-left: 20px;">', unsafe_allow_html=True)
+    st.markdown('<div style="display: flex; justify-content: flex-start; padding-left: 30px;">', unsafe_allow_html=True)
     st.markdown('<div class="box-sub box-malignant">MALIGNANT</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 

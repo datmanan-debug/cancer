@@ -62,7 +62,7 @@ st.markdown("""
     
     /* --- إجبار أزرار Streamlit (Back & Next) على اللون الوردي الموحد وطرد البنفسجي --- */
     div.stButton > button {
-        background-color: #C73B8A !important;
+        background-color: #E91E8C !important;
         color: #FFFFFF !important;
         border: none !important;
         border-radius: 25px !important;
@@ -77,7 +77,7 @@ st.markdown("""
     /* عند تمرير الماوس */
     div.stButton > button:hover {
         background-color: #A32D6F !important;
-        color: #FFFFFF !important;
+        color: #AD1457 !important;
     }
     
     /* عند الضغط الفعلي لإلغاء الوميض البنفسجي */

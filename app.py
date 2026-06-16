@@ -1,18 +1,18 @@
-﻿import streamlit as st
+import streamlit as st
 
-# إعدادات الصفحة الأساسية
-st.set_page_config(page_title="Abnormal Classification Result", layout="centered")
+# إعدادات الصفحة الأساسية لتتوسط الشاشة
+st.set_page_config(page_title="Classification", layout="centered")
 
-# إضافة الستايل الخاص (CSS) لتوحيد الألوان والمسافات بدقة
+# الستايل السحري والإجباري لكسر أي لون بنفسجي وتثبيت الدرجة الوردية الصارخة مالتك
 st.markdown("""
     <style>
-    /* تغيير خلفية التطبيق بأكمله إلى الأبيض */
+    /* جعل الخلفية بيضاء تماماً */
     .stApp {
         background-color: #FFFFFF !important;
     }
     
-    /* حاوية مخصصة لتوسط العناصر عمودياً */
-    .center-container {
+    /* حاوية العرض الهرمي */
+    .hierarchy-container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -20,47 +20,47 @@ st.markdown("""
         margin-top: 40px;
     }
     
-    /* ستايل الكارت الرئيسي بالأعلى ABNORMAL */
-    .main-status {
-        width: 260px;
+    /* الكارت العلوي الرئيسي ABNORMAL */
+    .box-abnormal {
+        width: 250px;
         background-color: #C73B8A !important;
         color: #FFFFFF !important;
-        border: 3.5px solid #C73B8A !important;
-        border-radius: 20px;
-        font-size: 22px;
+        font-size: 20px;
         font-weight: bold;
         text-align: center;
-        padding: 12px 0;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
-        margin-bottom: 40px; /* مسافة واضحة تحت الكارت الرئيسي */
+        padding: 15px 0;
+        border-radius: 20px;
+        border: 3.5px solid #C73B8A !important;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+        margin-bottom: 40px;
     }
     
-    /* ستايل كروت التصنيف الفرعية (حميد / خبيث) */
-    .sub-status {
-        width: 220px;
-        border-radius: 20px;
+    /* الكروت الفرعية بالأسفل */
+    .box-sub {
+        width: 200px;
         font-size: 18px;
         font-weight: bold;
         text-align: center;
         padding: 12px 0;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
     }
     
-    /* كارت BENIGN (خلفية بيضاء وحدود وردية صارخة) */
-    .benign-style {
+    /* كارت BENIGN (حدود وردية وخلفية بيضاء) */
+    .box-benign {
         border: 3.5px solid #C73B8A !important;
         background-color: #FFFFFF !important;
         color: #C73B8A !important;
     }
     
-    /* كارت MALIGNANT (خلفية وردية صارخة كاملة) */
-    .malignant-style {
+    /* كارت MALIGNANT (وردي صارخ صلب كامل) */
+    .box-malignant {
         background-color: #C73B8A !important;
         color: #FFFFFF !important;
         border: 3.5px solid #C73B8A !important;
     }
     
-    /* --- إجبار أزرار التحكم السفلي على اللون الوردي الصارخ ومنع البنفسجي --- */
+    /* --- إجبار أزرار Streamlit (Back & Next) على اللون الوردي الموحد وطرد البنفسجي --- */
     div.stButton > button {
         background-color: #C73B8A !important;
         color: #FFFFFF !important;
@@ -70,60 +70,61 @@ st.markdown("""
         font-size: 18px !important;
         font-weight: bold !important;
         width: 140px !important;
-        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.1) !important;
         transition: all 0.2s ease !important;
     }
     
+    /* عند تمرير الماوس */
     div.stButton > button:hover {
         background-color: #A32D6F !important;
         color: #FFFFFF !important;
     }
     
-    div.stButton > button:focus {
+    /* عند الضغط الفعلي لإلغاء الوميض البنفسجي */
+    div.stButton > button:focus, div.stButton > button:active {
         background-color: #C73B8A !important;
         color: #FFFFFF !important;
+        border: none !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
 
-# --- 1. عرض الكارت الرئيسي المرتفع (ABNORMAL) ---
-st.markdown('<div class="center-container">', unsafe_allow_html=True)
-st.markdown('<div class="main-status">ABNORMAL</div>', unsafe_allow_html=True)
+# --- 1. بناء الهيكل الهرمي المرتب (العنصر الرئيسي فوق) ---
+st.markdown('<div class="hierarchy-container">', unsafe_allow_html=True)
+st.markdown('<div class="box-abnormal">ABNORMAL</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 
-# --- 2. عرض الكارتين الفرعيين متجاورين بمسافة متناسقة لأسفل ---
-col_sub1, col_sub2 = st.columns([1, 1])
+# --- 2. صف العناصر الفرعية (BENIGN و MALIGNANT) مع مسافة واضحة بينهم ---
+col_left, col_right = st.columns([1, 1])
 
-with col_sub1:
-    # محاذاة الكارت لليمين ليقترب من المنتصف
-    st.markdown('<div style="display: flex; justify-content: flex-end;">', unsafe_allow_html=True)
-    st.markdown('<div class="sub-status benign-style">BENIGN</div>', unsafe_allow_html=True)
+with col_left:
+    st.markdown('<div style="display: flex; justify-content: flex-end; padding-right: 20px;">', unsafe_allow_html=True)
+    st.markdown('<div class="box-sub box-benign">BENIGN</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-with col_sub2:
-    # محاذاة الكارت لليسار ليقترب من المنتصف
-    st.markdown('<div style="display: flex; justify-content: flex-start;">', unsafe_allow_html=True)
-    st.markdown('<div class="sub-status malignant-style">MALIGNANT</div>', unsafe_allow_html=True)
+with col_right:
+    st.markdown('<div style="display: flex; justify-content: flex-start; padding-left: 20px;">', unsafe_allow_html=True)
+    st.markdown('<div class="box-sub box-malignant">MALIGNANT</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-# مسافة عزل عمودية ناعمة قبل الأزرار السفلية
+# مسافة منسقة قبل أزرار التحكم السفلي
 st.write("<br><br><br>", unsafe_allow_html=True)
 
 
-# --- 3. أزرار التحكم (Back و Next) متقاربة باللون الوردي الصارخ بالمنتصف ---
+# --- 3. أزرار التحكم المتقاربة باللون الوردي الصارخ في المنتصف السفلي ---
 nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1.3, 1, 1, 1.3])
 
 with nav_col2:
     st.markdown('<div style="display: flex; justify-content: flex-end;">', unsafe_allow_html=True)
     if st.button("« Back"):
-        st.write("") # الأكشن المخصص للرجوع للوراء
+        st.write("")  # الأكشن للعودة للوراء
     st.markdown('</div>', unsafe_allow_html=True)
 
 with nav_col3:
     st.markdown('<div style="display: flex; justify-content: flex-start;">', unsafe_allow_html=True)
     if st.button("Next »"):
-        st.write("") # الأكشن المخصص للذهاب للواجهة التالية
+        st.write("")  # الأكشن للذهاب للواجهة التالية
     st.markdown('</div>', unsafe_allow_html=True)
